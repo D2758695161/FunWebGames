@@ -18,12 +18,46 @@ Build 10 browser-based games for 6-year-old children. All games run as static HT
 - Animated, colorful design — feels like a toy box
 - No text that a 6-year-old can't skip — visual navigation only
 
-### GR-2: Shared Visual Style
-- Color palette: bright primary colors (red, blue, yellow, green) + pastels
+### GR-2: Visual Design (Apple-Inspired)
+
+Follow Apple's design principles — clarity, deference, depth — adapted for children:
+
+**Simplicity & Focus:**
+- Every screen has one clear purpose — remove elements until there's nothing left to remove
+- Generous whitespace between all elements — nothing feels cramped
+- Interactive elements are visually prominent; backgrounds and chrome recede
+
+**Progressive Disclosure:**
+- Start with the simplest view — no settings panels on first load
+- Difficulty options appear only after the child plays once, or are presented as simple visual choices (★ ★★ ★★★)
+- Advanced features (record, save, etc.) are secondary — never competing with the core interaction
+
+**Depth & Layering:**
+- Use subtle shadows and elevation to create physical depth — buttons feel pressable, cards feel liftable
+- Active/selected elements rise above the surface (translateY + shadow increase)
+- Background layers are muted; foreground gameplay elements are vibrant
+- Translucent overlays for modals/dialogs — never fully opaque blockers
+
+**Color with Purpose:**
+- Palette: bright primary colors (red, blue, yellow, green) + soft pastels for backgrounds
+- Color always signals something: green = correct, highlighted = interactive, muted = background
+- Never use color as pure decoration — every color choice communicates state
+
+**Typography:**
 - Font: rounded, playful sans-serif (system fonts: `"Comic Sans MS", "Chalkboard SE", "Arial Rounded MT Bold", sans-serif`)
-- Minimum touch target: 48x48px for all interactive elements
+- Numbers and letters in games are large enough to be the interaction itself
+- Text is for parents (instructions, labels) — never the primary child interface
+
+**Consistency:**
+- Same gestures do the same things across all 10 games
+- "Back to Games" button is always in the same position and style
+- Success feedback (sparkle, chime) is identical across all games
+- Shared styles via `css/shared.css` — no per-game color palette drift
+
+**Dimensions:**
+- Minimum touch target: 48x48px with at least 8px spacing between targets
 - Rounded corners on everything (border-radius ≥ 12px)
-- Subtle shadows for depth — feels tactile
+- Cards, buttons, and panels use consistent border-radius and shadow values
 
 ### GR-3: Audio & Feedback
 - Every tap/click produces a soft sound effect

@@ -202,23 +202,62 @@ open index.html
 
 ## Design Principles
 
-1. **Kid-friendly**: Large buttons, bright colors, forgiving interactions, no small text
-2. **No reading required**: Icons, images, and sounds guide the child — minimal text, and any text has audio cues
-3. **Encouraging**: Positive feedback on every action — stars, sounds, animations. No "wrong" — just "try again!"
-4. **Short sessions**: Each game round is 1-3 minutes. Kids can stop anytime.
-5. **Touch-friendly**: Works on tablets. All interactions are tap/click/drag — no keyboard required.
-6. **Safe**: No external links, no ads, no data collection, no network requests during gameplay.
-7. **Accessible**: High contrast colors, large touch targets (min 48px), simple audio cues.
+Inspired by Apple's design philosophy — clarity, deference, depth — adapted for a 6-year-old audience.
+
+### Core Philosophy
+1. **Simplicity first**: Every screen has one clear purpose. Remove until there's nothing left to remove. If a child hesitates, the design failed.
+2. **Progressive disclosure**: Start with the simplest version. Reveal complexity only as the child masters the basics. Easy mode first, no settings on the first screen, difficulty unlocks through play.
+3. **Direct manipulation**: Objects behave like real things. Drag a puzzle piece, it moves with your finger. Tap a bubble, it pops. No abstract buttons when a direct gesture works.
+4. **Meaningful animation**: Every animation communicates something — a bounce says "tap me", a sparkle says "well done", a gentle shake says "try again". Never animate for decoration alone.
+5. **Consistency**: Same gestures do the same things across all 10 games. Back button is always in the same place. Success always looks and sounds the same. A child who learns one game already knows how to navigate the rest.
+
+### Visual Design
+6. **Generous whitespace**: Don't crowd the screen. Let every element breathe. Large tap targets (min 48px) with generous padding between them.
+7. **Depth through layering**: Use subtle shadows, translucency, and z-ordering to create a sense of physical space — cards feel like cards, buttons feel pressable, backgrounds recede.
+8. **Color with purpose**: Bright colors draw attention to interactive elements. Muted backgrounds keep focus on gameplay. Color is never decorative — it always signals something (correct = green glow, active = highlighted, etc.).
+9. **Typography as interface**: Rounded, friendly sans-serif. Numbers and letters are large enough to be the interaction itself, not labels for something else.
+
+### Interaction Design
+10. **Forgiveness**: No wrong answers — just "not yet." No timers that punish. No scores that shame. Every interaction gives positive or neutral feedback.
+11. **Instant feedback**: Every touch produces an immediate response — sound, animation, color change. Latency kills the feeling of direct manipulation.
+12. **No reading required**: Icons, images, colors, and sounds guide the child. Any text exists for parents, never as the primary interface.
+13. **Touch-native**: Designed for fingers first, mouse second. All interactions are tap/drag/swipe — no hover states, no right-click, no keyboard shortcuts.
+
+### Safety & Trust
+14. **Contained experience**: No external links, no ads, no data collection, no network requests during gameplay. Parents should feel safe handing over the device.
+15. **Respectful of attention**: Short sessions (1-3 minutes per round). Natural stopping points. No dark patterns to keep playing.
 
 ## Success Criteria
 
+### Functional
 - [ ] 10 fully functional games accessible from the landing page
-- [ ] Each game has clear, visual instructions (how to play)
+- [ ] Landing page shows all 10 games with thumbnails and one-click launch
 - [ ] All games work in Chrome, Safari, and Firefox (desktop + tablet)
 - [ ] No external dependencies — works offline after initial load
-- [ ] Each game has a test checklist in `tests/checklist.md`
-- [ ] All code passes basic quality review (no console errors, no broken assets)
-- [ ] Landing page shows all 10 games with thumbnails and one-click launch
+- [ ] No console errors or warnings in any game
+- [ ] Each game has a completed test checklist in `tests/checklist.md`
+
+### Design Quality
+- [ ] Every screen has a single, obvious purpose — no clutter
+- [ ] Progressive difficulty: easy mode is immediately playable with zero instructions
+- [ ] Consistent navigation: "Back to Games" always in the same position, same style
+- [ ] Animations are purposeful — every motion communicates state or feedback
+- [ ] Generous whitespace — nothing feels cramped, even on 320px screens
+- [ ] Color palette is cohesive across all games (shared via `css/shared.css`)
+- [ ] Depth and layering: interactive elements feel elevated above backgrounds
+
+### Interaction Quality
+- [ ] Every tap/drag produces instant visual + audio feedback (<100ms)
+- [ ] No wrong answers — all incorrect actions get gentle, encouraging feedback
+- [ ] Direct manipulation: drag puzzle pieces, pop bubbles, trace letters — gestures match the metaphor
+- [ ] All interactive elements ≥ 48px touch targets with adequate spacing
+- [ ] Works identically with touch and mouse — no hover-dependent interactions
+
+### Kid-Friendliness
+- [ ] A 6-year-old can start playing any game without reading a single word
+- [ ] Each game round completes in 1-3 minutes with a natural stopping point
+- [ ] Celebration animations on every completion (confetti, stars, sounds)
+- [ ] No external links, ads, or network requests — completely self-contained
 - [ ] Positive, encouraging UX throughout — no negative feedback for wrong answers
 
 ## License
