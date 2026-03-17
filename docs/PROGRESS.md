@@ -24,7 +24,7 @@
 | Component | Status | Issues | Last Updated |
 |-----------|--------|--------|-------------|
 | Landing Page | Ready for test | #1 | 2026-03-17 |
-| Shared CSS | Implementation ready | #2 | 2026-03-17 |
+| Shared CSS | Ready for test | #2 | 2026-03-17 |
 | Test Checklist | Not started | — | — |
 
 ## Milestones
@@ -41,15 +41,14 @@
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
 | #1 | Implement Landing Page with Game Card Grid | ready-for-test, feature, priority-high | Ready for Test |
-| #2 | Create Shared CSS Stylesheet | ready-for-dev, feature, priority-high | Ready for Dev |
+| #2 | Create Shared CSS Stylesheet | ready-for-test, feature, priority-high | Ready for Test |
 | #3 | Implement Color Match Memory Game | ready-for-dev, game | Ready for Dev |
 | #4 | Implement Animal Puzzle Drag-and-Drop Game | ready-for-dev, game | Ready for Dev |
 | #5 | Implement Bubble Pop Number/Letter Game | ready-for-dev, game | Ready for Dev |
 
 ## Notes
 
-- Landing page (#1) implemented and moved to ready-for-test
-- Shared CSS created
-- All 10 game folders created with placeholder HTML files
-- 4 issues still ready-for-dev, waiting for Dev Agent
+- Landing page (#1) and Shared CSS (#2) implemented and ready for test
+- 3 game issues still ready-for-dev, waiting for Dev Agent
 - At maximum capacity (5 open issues) - no new issues can be created until some are closed
+- Waiting for Tester Agent to process #1 and #2
