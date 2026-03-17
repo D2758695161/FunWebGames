@@ -2,12 +2,12 @@
 
 .game-header {
   text-align: center;
-  padding: var(--space-md);
-  margin-bottom: var(--space-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .game-header h1 {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--spacing-md);
 }
 
 /* Mode Selector */
@@ -15,40 +15,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
   flex-wrap: wrap;
 }
 
 .mode-label {
   font-weight: bold;
-  color: var(--color-text-dark);
+  color: var(--text-dark);
 }
 
 .mode-btn {
   min-width: var(--touch-target);
   min-height: var(--touch-target);
-  padding: var(--space-sm) var(--space-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
   font-size: 1rem;
   font-weight: bold;
-  font-family: var(--font-heading);
-  background: var(--color-light-gray);
-  border: 2px solid var(--color-medium-gray);
+  font-family: var(--font-family);
+  background: var(--bg-light);
+  border: 2px solid var(--text-light);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .mode-btn:hover,
 .mode-btn:focus {
-  background: var(--color-primary-yellow);
-  border-color: var(--color-primary-yellow);
+  background: var(--color-yellow);
+  border-color: var(--color-yellow);
   transform: scale(1.05);
 }
 
 .mode-btn.active {
-  background: var(--color-primary-blue);
-  border-color: var(--color-primary-blue);
+  background: var(--color-blue);
+  border-color: var(--color-blue);
   color: white;
   box-shadow: var(--shadow-md);
 }
@@ -57,12 +57,12 @@
 .game-ui {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--spacing-md);
 }
 
 .prompt-display {
-  background: linear-gradient(135deg, var(--bg-pastel-pink) 0%, var(--bg-pastel-blue) 100%);
-  padding: var(--space-lg);
+  background: linear-gradient(135deg, var(--bg-soft-pink) 0%, var(--bg-soft-blue) 100%);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   animation: pulse 2s ease infinite;
@@ -71,7 +71,7 @@
 .prompt-text {
   font-size: clamp(1.25rem, 4vw, 2rem);
   font-weight: bold;
-  color: var(--color-text-dark);
+  color: var(--text-dark);
   display: block;
 }
 
@@ -79,10 +79,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-lg);
+  gap: var(--spacing-lg);
   flex-wrap: wrap;
-  background: var(--color-white);
-  padding: var(--space-md);
+  background: white;
+  padding: var(--spacing-md);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
@@ -90,7 +90,7 @@
 .stat {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--spacing-xs);
 }
 
 .stat-label {
@@ -100,7 +100,7 @@
 .stat-value {
   font-size: 1.25rem;
   font-weight: bold;
-  color: var(--color-primary-blue);
+  color: var(--color-blue);
   min-width: 60px;
   text-align: center;
 }
@@ -108,17 +108,17 @@
 /* Score Stars */
 .score-stars {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--spacing-xs);
 }
 
 .score-star {
   font-size: 1.5rem;
-  color: var(--color-medium-gray);
-  transition: all var(--transition-fast);
+  color: var(--text-light);
+  transition: all 0.2s ease;
 }
 
 .score-star.filled {
-  color: var(--color-primary-yellow);
+  color: var(--color-yellow);
   animation: sparkle 0.5s ease;
 }
 
@@ -127,7 +127,7 @@
   position: relative;
   width: 100%;
   height: 400px;
-  background: linear-gradient(180deg, var(--bg-pastel-blue) 0%, var(--bg-pastel-pink) 100%);
+  background: linear-gradient(180deg, var(--bg-soft-blue) 0%, var(--bg-soft-pink) 100%);
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -149,7 +149,7 @@
   justify-content: center;
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: var(--font-heading);
+  font-family: var(--font-family);
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
@@ -287,9 +287,9 @@
 }
 
 .modal-content {
-  background: var(--color-white);
+  background: white;
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  padding: var(--spacing-xl);
   max-width: 400px;
   width: 90%;
   box-shadow: var(--shadow-lg);
@@ -308,11 +308,47 @@
   overflow: hidden;
 }
 
+/* Confetti Animation */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall 3s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .stats-bar {
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--spacing-sm);
   }
   
   .mode-selector {
