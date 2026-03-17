@@ -4,15 +4,15 @@
 
 **Last Updated**: 2026-03-17
 **Open Issues**: 5 (at capacity)
-**Closed Issues**: 0
+**Closed Issues**: 2
 
 | # | Game | Status | Issues | Last Updated |
 |---|------|--------|--------|-------------|
 | 1 | Color Match Memory | Implementation ready | #3 | 2026-03-17 |
 | 2 | Animal Puzzle | Implementation ready | #4 | 2026-03-17 |
 | 3 | Bubble Pop | Implementation ready | #5 | 2026-03-17 |
-| 4 | Shape Builder | Not started | — | — |
-| 5 | Counting Garden | Not started | — | — |
+| 4 | Shape Builder | Requirements ready | #6 | 2026-03-17 |
+| 5 | Counting Garden | Requirements ready | #7 | 2026-03-17 |
 | 6 | Letter Explorer | Not started | — | — |
 | 7 | Music Maker | Not started | — | — |
 | 8 | Maze Runner | Not started | — | — |
@@ -23,8 +23,8 @@
 
 | Component | Status | Issues | Last Updated |
 |-----------|--------|--------|-------------|
-| Landing Page | Ready for test | #1 | 2026-03-17 |
-| Shared CSS | Ready for test | #2 | 2026-03-17 |
+| Landing Page | Done | #1 | 2026-03-17 |
+| Shared CSS | Done | #2 | 2026-03-17 |
 | Test Checklist | Not started | — | — |
 
 ## Milestones
@@ -40,15 +40,15 @@
 
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
-| #1 | Implement Landing Page with Game Card Grid | ready-for-test, feature, priority-high | Ready for Test |
-| #2 | Create Shared CSS Stylesheet | ready-for-test, feature, priority-high | Ready for Test |
 | #3 | Implement Color Match Memory Game | ready-for-dev, game | Ready for Dev |
 | #4 | Implement Animal Puzzle Drag-and-Drop Game | ready-for-dev, game | Ready for Dev |
 | #5 | Implement Bubble Pop Number/Letter Game | ready-for-dev, game | Ready for Dev |
+| #6 | Implement Shape Builder Geometry Game | ready-for-dev, game | Ready for Dev |
+| #7 | Implement Counting Garden Math Game | ready-for-dev, game | Ready for Dev |
 
 ## Notes
 
-- Landing page (#1) and Shared CSS (#2) implemented and ready for test
-- 3 game issues still ready-for-dev, waiting for Dev Agent
-- At maximum capacity (5 open issues) - no new issues can be created until some are closed
-- Waiting for Tester Agent to process #1 and #2
+- Landing page (#1) and Shared CSS (#2) completed and closed
+- 5 game issues ready-for-dev at maximum capacity
+- 5 more games need requirements and issues (Letter Explorer, Music Maker, Maze Runner, Star Catcher, Dress Up)
+- Waiting for Dev Agent to start implementing games
