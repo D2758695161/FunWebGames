@@ -2,50 +2,50 @@
 
 .game-header {
   text-align: center;
-  padding: var(--space-md);
-  margin-bottom: var(--space-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .game-header h1 {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .difficulty-selector {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
   flex-wrap: wrap;
 }
 
 .difficulty-label {
   font-weight: bold;
-  color: var(--color-text-dark);
+  color: var(--text-dark);
 }
 
 .difficulty-btn {
   min-width: var(--touch-target);
   min-height: var(--touch-target);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   font-size: 1.5rem;
-  background: var(--color-light-gray);
-  border: 2px solid var(--color-medium-gray);
+  background: var(--bg-light);
+  border: 2px solid var(--text-light);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
 .difficulty-btn:hover,
 .difficulty-btn:focus {
-  background: var(--color-primary-yellow);
-  border-color: var(--color-primary-yellow);
+  background: var(--color-yellow);
+  border-color: var(--color-yellow);
   transform: scale(1.1);
 }
 
 .difficulty-btn.active {
-  background: var(--color-primary-blue);
-  border-color: var(--color-primary-blue);
+  background: var(--color-blue);
+  border-color: var(--color-blue);
   color: white;
   box-shadow: var(--shadow-md);
 }
@@ -54,10 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-lg);
+  gap: var(--spacing-lg);
   flex-wrap: wrap;
-  background: var(--color-white);
-  padding: var(--space-md);
+  background: white;
+  padding: var(--spacing-md);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
@@ -65,7 +65,7 @@
 .stat {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--spacing-xs);
 }
 
 .stat-label {
@@ -75,7 +75,7 @@
 .stat-value {
   font-size: 1.25rem;
   font-weight: bold;
-  color: var(--color-primary-blue);
+  color: var(--color-blue);
   min-width: 60px;
   text-align: center;
 }
@@ -83,8 +83,8 @@
 .puzzle-container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  padding: var(--space-md);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
 }
 
 .puzzle-board {
@@ -93,7 +93,7 @@
   max-width: 500px;
   aspect-ratio: 1;
   margin: 0 auto;
-  background: var(--color-light-gray);
+  background: var(--bg-light);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
@@ -115,9 +115,9 @@
 .ghost-outline {
   position: absolute;
   background: rgba(255, 255, 255, 0.3);
-  border: 2px dashed var(--color-medium-gray);
+  border: 2px dashed var(--text-light);
   border-radius: var(--radius-sm);
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease;
 }
 
 .ghost-outline.filled {
@@ -166,18 +166,18 @@
 
 @keyframes glow-piece {
   0%, 100% {
-    box-shadow: 0 0 5px var(--color-success);
+    box-shadow: 0 0 5px var(--color-green);
   }
   50% {
-    box-shadow: 0 0 20px var(--color-success), 0 0 30px var(--color-success);
+    box-shadow: 0 0 20px var(--color-green), 0 0 30px var(--color-green);
   }
 }
 
 .piece-pool {
   min-height: 150px;
-  background: var(--bg-pastel-peach);
+  background: var(--bg-soft-pink);
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
+  padding: var(--spacing-md);
   position: relative;
   overflow: hidden;
 }
@@ -188,7 +188,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--color-text-light);
+  color: var(--text-light);
   font-weight: bold;
   font-size: 1.25rem;
   opacity: 0.5;
@@ -242,9 +242,9 @@
 }
 
 .modal-content {
-  background: var(--color-white);
+  background: white;
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  padding: var(--spacing-xl);
   max-width: 400px;
   width: 90%;
   box-shadow: var(--shadow-lg);
@@ -261,6 +261,42 @@
   pointer-events: none;
   z-index: 1500;
   overflow: hidden;
+}
+
+/* Confetti Animation */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall 3s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Responsive Adjustments */
