@@ -5,15 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bubble Pop - FunWebGames</title>
   <link rel="stylesheet" href="../../css/shared.css">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Pop bubbles with numbers, letters, and colors">
 </head>
 <body>
   <a href="../../index.html" class="btn btn-back">← Back to Games</a>
+
   <main class="game-container">
+    <header class="game-header">
+      <h1>🫧 Bubble Pop</h1>
+      
+      <div id="mode-selector" class="mode-selector">
+        <span class="mode-label">Choose Mode:</span>
+        <button class="mode-btn" data-mode="numbers" aria-label="Numbers mode">123 Numbers</button>
+        <button class="mode-btn" data-mode="letters" aria-label="Letters mode">ABC Letters</button>
+        <button class="mode-btn" data-mode="colors" aria-label="Colors mode">🎨 Colors</button>
+      </div>
+
+      <div id="game-ui" class="game-ui hidden">
+        <div class="prompt-display">
+          <span id="prompt-text" class="prompt-text">Pop the number 5!</span>
+        </div>
+        
+        <div class="stats-bar">
+          <div class="stat">
+            <span class="stat-label">⭐ Score:</span>
+            <div id="score-stars" class="score-stars"></div>
+          </div>
+          <div class="stat">
+            <span class="stat-label">🎯 Round:</span>
+            <span id="round-display" class="stat-value">1/10</span>
+          </div>
+          <button id="restart-btn" class="btn btn-secondary">🔄 Restart</button>
+        </div>
+      </div>
+    </header>
+
     <div class="game-area">
-      <h1 class="text-center">🫧 Bubble Pop</h1>
-      <p class="text-center mt-md">Game coming soon!</p>
-      <p class="text-center mt-sm">Pop the bubbles with the right numbers and letters!</p>
+      <div id="bubble-container" class="bubble-container">
+        <!-- Bubbles will be spawned here -->
+      </div>
+    </div>
+
+    <div id="celebration-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="celebration">
+          <h2 class="celebration__title">🎉 You Did It! 🎉</h2>
+          <p class="celebration__message">
+            You popped <span id="final-score"></span> bubbles!
+          </p>
+          <button id="play-again-btn" class="btn btn-primary">🎮 Play Again</button>
+        </div>
+      </div>
     </div>
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
