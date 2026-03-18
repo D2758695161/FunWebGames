@@ -1,0 +1,337 @@
+/* Counting Garden Game - Styles */
+/* Follows GR-2: Visual Design & GR-4: Responsive & Touch */
+
+/* ===== Layout ===== */
+.game-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  min-height: 100vh;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.game-header h1 {
+  color: var(--color-green);
+}
+
+.score-display {
+  display: flex;
+  gap: var(--spacing-lg);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.score-display span {
+  background: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+#stars {
+  color: var(--color-yellow);
+}
+
+#round-display {
+  color: var(--color-blue);
+}
+
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== Garden Scene ===== */
+.garden-scene {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 60%, #90EE90 60%, #228B22 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 100%);
+}
+
+.grass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, #90EE90 0%, #228B22 100%);
+}
+
+.objects-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.garden-object {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.garden-object svg {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+.garden-object.counting {
+  animation: countPulse 0.5s ease-in-out;
+  filter: drop-shadow(0 0 15px var(--color-yellow));
+}
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+/* Object Animations */
+.garden-object.butterfly {
+  animation: flutter 2s ease-in-out infinite;
+}
+
+@keyframes flutter {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(5deg); }
+  75% { transform: translateY(-10px) rotate(-5deg); }
+}
+
+.garden-object.flower {
+  animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.garden-object.bee {
+  animation: buzz 1.5s ease-in-out infinite;
+}
+
+@keyframes buzz {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, 5px); }
+}
+
+.garden-object.ladybug {
+  animation: crawl 4s ease-in-out infinite;
+}
+
+@keyframes crawl {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* ===== Question Area ===== */
+.question-area {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.prompt h2 {
+  color: var(--text-dark);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: var(--spacing-lg);
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  min-width: 100px;
+  min-height: 100px;
+  font-size: 3rem;
+  font-weight: bold;
+  background: var(--color-blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-md);
+}
+
+.option-btn:hover {
+  transform: scale(1.1);
+  background: var(--color-purple);
+  box-shadow: var(--shadow-lg);
+}
+
+.option-btn:active {
+  transform: scale(0.95);
+}
+
+.option-btn.correct {
+  background: var(--color-green);
+  animation: correctPulse 0.5s ease-in-out;
+}
+
+.option-btn.wrong {
+  background: var(--color-red);
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.feedback-message {
+  min-height: 40px;
+  margin-top: var(--spacing-md);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-green);
+}
+
+/* ===== Modal ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-content h2 {
+  color: var(--color-yellow);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.modal-content p {
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.25rem;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+/* ===== Star Animation ===== */
+.star-fly {
+  position: absolute;
+  font-size: 2rem;
+  animation: flyToStar 1s ease-in-out forwards;
+  z-index: 100;
+}
+
+@keyframes flyToStar {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ===== Confetti ===== */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--color-yellow);
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .garden-scene {
+    height: 300px;
+  }
+
+  .garden-object svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .option-btn {
+    min-width: 80px;
+    min-height: 80px;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .option-btn {
+    min-width: 70px;
+    min-height: 70px;
+    font-size: 2rem;
+  }
+
+  .options-container {
+    gap: var(--spacing-sm);
+  }
+}
