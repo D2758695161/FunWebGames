@@ -1,10 +1,10 @@
 # Progress Tracker
 
-## Status: 5 Games Complete - Counting Garden Ready for Test
+## Status: 5 Games Complete - 5 Games Ready for Development
 
-**Last Updated**: 2026-03-18
-**Open Issues**: 2
-**Closed Issues**: 6
+**Last Updated**: 2026-03-24
+**Open Issues**: 6 (5 game issues + 1 milestone)
+**Closed Issues**: 8
 
 | # | Game | Status | Issues | Last Updated |
 |---|------|--------|--------|-------------|
@@ -13,11 +13,11 @@
 | 3 | Bubble Pop | Done | #5 | 2026-03-18 |
 | 4 | Shape Builder | Done | #6 | 2026-03-18 |
 | 5 | Counting Garden | Done | #7 | 2026-03-18 |
-| 6 | Letter Explorer | Requirements ready | — | 2026-03-17 |
-| 7 | Music Maker | Requirements ready | — | 2026-03-17 |
-| 8 | Maze Runner | Requirements ready | — | 2026-03-17 |
-| 9 | Star Catcher | Requirements ready | — | 2026-03-17 |
-| 10 | Dress Up | Requirements ready | — | 2026-03-17 |
+| 6 | Letter Explorer | Ready for Dev | #9 | 2026-03-24 |
+| 7 | Music Maker | Ready for Dev | #10 | 2026-03-24 |
+| 8 | Maze Runner | Ready for Dev | #11 | 2026-03-24 |
+| 9 | Star Catcher | Ready for Dev | #12 | 2026-03-24 |
+| 10 | Dress Up | Ready for Dev | #13 | 2026-03-24 |
 
 ## Infrastructure
 
@@ -36,20 +36,25 @@
 - [ ] All games pass code review and testing
 - [x] All requirements documented
 
-## Open Issues (1 active + 1 milestone)
+## Open Issues
 
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
-| #7 | Implement Counting Garden Math Game | ready-for-test, game | Ready for Test |
-| #8 | All requirements complete | milestone | Milestone |
+| #9 | Implement Letter Explorer Learning Game | ready-for-dev, game | Ready for Dev |
+| #10 | Implement Music Maker Creative Game | ready-for-dev, game | Ready for Dev |
+| #11 | Implement Maze Runner Puzzle Game | ready-for-dev, game | Ready for Dev |
+| #12 | Implement Star Catcher Coordination Game | ready-for-dev, game | Ready for Dev |
+| #13 | Implement Dress Up Creative Game | ready-for-dev, game | Ready for Dev |
+| #14 | Milestone: All 10 Games Complete and Playable | milestone | Milestone |
 
 ## Notes
 
-- 5 games fully implemented: Color Match, Animal Puzzle, Bubble Pop, Shape Builder, Counting Garden
-- Issue #7 (Counting Garden) ready for test - waiting for Tester Agent
-- Remaining 5 games (Letter Explorer, Music Maker, Maze Runner, Star Catcher, Dress Up) need implementation issues
-- Milestone issue #8 still open - PM waiting to create remaining issues until milestone closed
-- Tester Agent needed to test #7, then Dev Agent can continue with remaining games
+- 5 games fully implemented and tested: Color Match, Animal Puzzle, Bubble Pop, Shape Builder, Counting Garden
+- 5 games ready for development: Letter Explorer (#9), Music Maker (#10), Maze Runner (#11), Star Catcher (#12), Dress Up (#13)
+- Issue #9 was incorrectly marked ready-for-review but implementation was not pushed - corrected to ready-for-dev
+- Milestone issue #14 tracks overall progress toward 10 complete games
+- At maximum capacity: 5 game issues open (per AWR-2 constraint)
+- Developer Agent should pick up #9 next (oldest ready-for-dev)
 
 ## Implementation Status Summary
 
@@ -60,9 +65,9 @@
 - Shape Builder ✅
 - Counting Garden ✅
 
-**Placeholder Only (awaiting implementation):**
-- Letter Explorer
-- Music Maker
-- Maze Runner
-- Star Catcher
-- Dress Up
+**Ready for Development (issues created, awaiting implementation):**
+- Letter Explorer (#9)
+- Music Maker (#10)
+- Maze Runner (#11)
+- Star Catcher (#12)
+- Dress Up (#13)
