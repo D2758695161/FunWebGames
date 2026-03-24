@@ -5,15 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Maker - FunWebGames</title>
   <link rel="stylesheet" href="../../css/shared.css">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Create music with colorful instruments">
 </head>
 <body>
+  <!-- Back to Games Button -->
   <a href="../../index.html" class="btn btn-back">← Back to Games</a>
+
+  <!-- Game Container -->
   <main class="game-container">
-    <div class="game-area">
-      <h1 class="text-center">🎵 Music Maker</h1>
-      <p class="text-center mt-md">Game coming soon!</p>
-      <p class="text-center mt-sm">Create your own music with colorful instruments!</p>
-    </div>
+    <!-- Game Header -->
+    <header class="game-header">
+      <h1>🎵 Music Maker</h1>
+      <div class="status-indicator" id="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Ready to Play!</span>
+      </div>
+    </header>
+
+    <!-- Instrument Grid -->
+    <section class="instrument-grid" id="instrument-grid">
+      <button class="instrument-btn" data-instrument="drum" aria-label="Drum">
+        <div class="instrument-icon">🥁</div>
+        <div class="instrument-name">Drum</div>
+      </button>
+      <button class="instrument-btn" data-instrument="xylophone" aria-label="Xylophone">
+        <div class="instrument-icon">🎵</div>
+        <div class="instrument-name">Xylophone</div>
+      </button>
+      <button class="instrument-btn" data-instrument="piano" aria-label="Piano">
+        <div class="instrument-icon">🎹</div>
+        <div class="instrument-name">Piano</div>
+      </button>
+      <button class="instrument-btn" data-instrument="tambourine" aria-label="Tambourine">
+        <div class="instrument-icon">🪘</div>
+        <div class="instrument-name">Tambourine</div>
+      </button>
+      <button class="instrument-btn" data-instrument="trumpet" aria-label="Trumpet">
+        <div class="instrument-icon">🎺</div>
+        <div class="instrument-name">Trumpet</div>
+      </button>
+      <button class="instrument-btn" data-instrument="guitar" aria-label="Guitar">
+        <div class="instrument-icon">🎸</div>
+        <div class="instrument-name">Guitar</div>
+      </button>
+      <button class="instrument-btn" data-instrument="bell" aria-label="Bell">
+        <div class="instrument-icon">🔔</div>
+        <div class="instrument-name">Bell</div>
+      </button>
+      <button class="instrument-btn" data-instrument="maracas" aria-label="Maracas">
+        <div class="instrument-icon">🪇</div>
+        <div class="instrument-name">Maracas</div>
+      </button>
+    </section>
+
+    <!-- Control Panel -->
+    <section class="control-panel">
+      <!-- Record Controls -->
+      <div class="record-controls">
+        <button class="control-btn record" id="record-btn" aria-label="Record">
+          <div class="control-icon">⏺️</div>
+          <div class="control-label">Record</div>
+        </button>
+        <button class="control-btn play" id="play-btn" aria-label="Play" disabled>
+          <div class="control-icon">▶️</div>
+          <div class="control-label">Play</div>
+        </button>
+        <button class="control-btn clear" id="clear-btn" aria-label="Clear">
+          <div class="control-icon">🗑️</div>
+          <div class="control-label">Clear</div>
+        </button>
+      </div>
+
+      <!-- Magic Song Button -->
+      <button class="magic-btn" id="magic-btn" aria-label="Magic Song">
+        <div class="magic-icon">✨</div>
+        <div class="magic-label">Magic Song</div>
+      </button>
+
+      <!-- Tempo Control -->
+      <div class="tempo-control">
+        <div class="tempo-label">Tempo:</div>
+        <div class="tempo-slider">
+          <span class="tempo-icon">🐢</span>
+          <input type="range" min="1" max="3" value="2" id="tempo-slider" aria-label="Tempo slider">
+          <span class="tempo-icon">🐇</span>
+        </div>
+        <div class="tempo-display" id="tempo-display">Medium</div>
+      </div>
+    </section>
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
