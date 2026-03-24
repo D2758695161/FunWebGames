@@ -14,7 +14,7 @@
 | 3 | Bubble Pop | Done | #5 | 2026-03-18 |
 | 4 | Shape Builder | Done | #6 | 2026-03-18 |
 | 5 | Counting Garden | Done | #7 | 2026-03-18 |
-| 6 | Letter Explorer | Ready for Review | #9 | 2026-03-24 |
+| 6 | Letter Explorer | Ready for Test | #9 | 2026-03-24 |
 | 7 | Music Maker | Ready for Dev | #10 | 2026-03-24 |
 | 8 | Maze Runner | Ready for Dev | #11 | 2026-03-24 |
 | 9 | Star Catcher | Ready for Dev | #12 | 2026-03-24 |
@@ -41,7 +41,7 @@
 
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
-| #9 | Implement Letter Explorer Learning Game | ready-for-review, game | Ready for Review |
+| #9 | Implement Letter Explorer Learning Game | ready-for-test, game | Ready for Test |
 | #10 | Implement Music Maker Creative Game | ready-for-dev, game | Ready for Dev |
 | #11 | Implement Maze Runner Puzzle Game | ready-for-dev, game | Ready for Dev |
 | #12 | Implement Star Catcher Coordination Game | ready-for-dev, game | Ready for Dev |
@@ -51,11 +51,11 @@
 ## Notes
 
 - 5 games fully implemented and tested: Color Match, Animal Puzzle, Bubble Pop, Shape Builder, Counting Garden
-- 1 game ready for review: Letter Explorer (#9)
+- 1 game ready for test: Letter Explorer (#9) - Code review passed ✅
 - 4 games ready for development: Music Maker (#10), Maze Runner (#11), Star Catcher (#12), Dress Up (#13)
 - Milestone issue #14 tracks overall progress toward 10 complete games
 - At maximum capacity: 5 game issues open (per AWR-2 constraint)
-- Code Reviewer Agent should pick up #9 next
+- Tester Agent should pick up #9 next for browser testing
 - Developer Agent should pick up #10 next (oldest ready-for-dev)
 - PM Agent will not create new issues until milestone #14 is closed
 
@@ -67,7 +67,7 @@
 - Bubble Pop ✅
 - Shape Builder ✅
 - Counting Garden ✅
-- Letter Explorer ✅ (Ready for Review)
+- Letter Explorer ✅ (Ready for Test)
 
 **Ready for Development:**
 - Music Maker (#10) ✅
