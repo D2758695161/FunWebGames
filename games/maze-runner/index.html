@@ -5,15 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maze Runner - FunWebGames</title>
   <link rel="stylesheet" href="../../css/shared.css">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Guide your character through fun mazes!">
 </head>
 <body>
   <a href="../../index.html" class="btn btn-back">← Back to Games</a>
-  <main class="game-container">
-    <div class="game-area">
-      <h1 class="text-center">🗺️ Maze Runner</h1>
-      <p class="text-center mt-md">Game coming soon!</p>
-      <p class="text-center mt-sm">Guide the cute character through the maze!</p>
+
+  <!-- Character Selection Screen -->
+  <main class="game-container" id="character-select-screen">
+    <div class="character-select-container">
+      <h1 class="page-title">Choose Your Friend!</h1>
+      <div class="character-grid">
+        <button class="character-btn" data-character="bunny" aria-label="Choose Bunny">
+          <div class="character-icon">🐰</div>
+          <div class="character-name">Bunny</div>
+        </button>
+        <button class="character-btn" data-character="puppy" aria-label="Choose Puppy">
+          <div class="character-icon">🐶</div>
+          <div class="character-name">Puppy</div>
+        </button>
+        <button class="character-btn" data-character="kitty" aria-label="Choose Kitty">
+          <div class="character-icon">🐱</div>
+          <div class="character-name">Kitty</div>
+        </button>
+      </div>
+      <button class="btn btn-primary start-btn" id="start-btn" disabled>Start Game</button>
     </div>
   </main>
+
+  <!-- Game Screen -->
+  <main class="game-container hidden" id="game-screen">
+    <div class="game-info">
+      <div class="maze-counter">Maze <span id="current-maze">1</span> of <span id="total-mazes">10</span></div>
+      <div class="star-counter">⭐ <span id="stars-collected">0</span></div>
+      <div class="timer">⏳ <span id="timer">0:00</span></div>
+    </div>
+
+    <div class="game-area">
+      <canvas id="maze-canvas"></canvas>
+    </div>
+
+    <div class="controls">
+      <div class="arrow-controls">
+        <button class="arrow-btn up" data-direction="up" aria-label="Move up">↑</button>
+        <div class="arrow-row">
+          <button class="arrow-btn left" data-direction="left" aria-label="Move left">←</button>
+          <button class="arrow-btn down" data-direction="down" aria-label="Move down">↓</button>
+          <button class="arrow-btn right" data-direction="right" aria-label="Move right">→</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div class="completion-screen hidden" id="completion-screen">
+      <div class="completion-message">
+        <h2>🎉 You did it! 🎉</h2>
+        <p>Stars collected: ⭐ <span id="final-stars">0</span></p>
+        <button class="btn btn-primary next-btn" id="next-btn">Next Maze →</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

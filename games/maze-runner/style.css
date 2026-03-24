@@ -1,0 +1,263 @@
+/* Maze Runner - Game Specific Styles */
+/* Follows GR-2: Visual Design */
+
+/* ===== Character Selection Screen ===== */
+.character-select-container {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.page-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--color-red);
+  margin-bottom: var(--spacing-lg);
+  text-shadow: var(--shadow-sm);
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .character-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.character-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background: white;
+  border: 3px solid var(--color-blue);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+  min-height: 140px;
+}
+
+.character-btn:hover,
+.character-btn:active {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.character-btn.selected {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.character-btn.selected .character-icon,
+.character-btn.selected .character-name {
+  color: white;
+}
+
+.character-icon {
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+}
+
+.character-name {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-top: var(--spacing-xs);
+}
+
+.start-btn {
+  min-width: 200px;
+  font-size: 1.25rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+.start-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== Game Screen ===== */
+#game-screen {
+  padding-top: calc(var(--spacing-xl) + var(--touch-target) + var(--spacing-sm));
+}
+
+.game-info {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-md);
+  max-width: 600px;
+  width: 100%;
+}
+
+.maze-counter,
+.star-counter,
+.timer {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.game-area {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+}
+
+#maze-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+  background: var(--bg-light);
+}
+
+/* ===== Arrow Controls ===== */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+}
+
+.arrow-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.arrow-row {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.arrow-btn {
+  min-width: 60px;
+  min-height: 60px;
+  font-size: 1.5rem;
+  background: var(--color-blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-btn:hover,
+.arrow-btn:active {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.arrow-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== Completion Screen ===== */
+.completion-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.completion-message {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  animation: slide-in 0.5s ease-out;
+}
+
+.completion-message h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--color-green);
+  margin-bottom: var(--spacing-md);
+}
+
+.completion-message p {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  margin-bottom: var(--spacing-lg);
+}
+
+.next-btn {
+  min-width: 180px;
+  font-size: 1.125rem;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 640px) {
+  .game-info {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .arrow-btn {
+    min-width: 55px;
+    min-height: 55px;
+    font-size: 1.25rem;
+  }
+
+  .character-select-container {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .game-area {
+    max-width: 700px;
+  }
+
+  .arrow-btn {
+    min-width: 65px;
+    min-height: 65px;
+  }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .character-btn:hover,
+  .character-btn:active,
+  .arrow-btn:hover,
+  .arrow-btn:active {
+    transform: none;
+  }
+
+  .completion-message {
+    animation: none;
+  }
+}
