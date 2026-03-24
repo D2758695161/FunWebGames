@@ -1,0 +1,387 @@
+/* Music Maker - Game Styles */
+/* Follows GR-2: Visual Design */
+
+/* ===== Game Container ===== */
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-sm);
+  padding-top: 80px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF9F0 0%, #F0F8FF 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* ===== Game Header ===== */
+.game-header {
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.game-header h1 {
+  font-size: 2rem;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-sm);
+  text-shadow: var(--shadow-sm);
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: white;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-green);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.status-indicator.recording .status-dot {
+  background: var(--color-red);
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.status-indicator.playing .status-dot {
+  background: var(--color-blue);
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.status-text {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+/* ===== Instrument Grid ===== */
+.instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 4px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.instrument-grid.recording {
+  border-color: var(--color-red);
+}
+
+.instrument-grid.playing {
+  border-color: var(--color-green);
+}
+
+.instrument-btn {
+  position: relative;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  transition: all 0.15s ease;
+  min-height: 120px;
+  box-shadow: var(--shadow-md);
+}
+
+.instrument-btn:active {
+  transform: scale(0.95);
+}
+
+.instrument-btn.playing {
+  animation: instrumentPulse 0.3s ease;
+}
+
+@keyframes instrumentPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: var(--shadow-lg); }
+  100% { transform: scale(1); }
+}
+
+.instrument-btn[data-instrument="drum"] {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+}
+
+.instrument-btn[data-instrument="xylophone"] {
+  background: linear-gradient(135deg, #4ECDC4 0%, #6EDFD7 100%);
+}
+
+.instrument-btn[data-instrument="piano"] {
+  background: linear-gradient(135deg, #FFE66D 0%, #FFF0A0 100%);
+}
+
+.instrument-btn[data-instrument="tambourine"] {
+  background: linear-gradient(135deg, #95E1D3 0%, #B5EDE2 100%);
+}
+
+.instrument-btn[data-instrument="trumpet"] {
+  background: linear-gradient(135deg, #FFD700 0%, #FFE440 100%);
+}
+
+.instrument-btn[data-instrument="guitar"] {
+  background: linear-gradient(135deg, #DDA0DD 0%, #EDC0ED 100%);
+}
+
+.instrument-btn[data-instrument="bell"] {
+  background: linear-gradient(135deg, #C0C0C0 0%, #E0E0E0 100%);
+}
+
+.instrument-btn[data-instrument="maracas"] {
+  background: linear-gradient(135deg, #FFB347 0%, #FFC877 100%);
+}
+
+.instrument-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.instrument-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Control Panel ===== */
+.control-panel {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.record-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-btn.record {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+  color: white;
+}
+
+.control-btn.record.active {
+  animation: recordPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes recordPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+  50% { box-shadow: 0 0 0 15px rgba(255, 107, 107, 0); }
+}
+
+.control-btn.play {
+  background: linear-gradient(135deg, #5CB85C 0%, #7CC87C 100%);
+  color: white;
+}
+
+.control-btn.clear {
+  background: linear-gradient(135deg, #F0AD4E 0%, #F0C07E 100%);
+  color: white;
+}
+
+.control-icon {
+  font-size: 1.5rem;
+}
+
+.control-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* ===== Magic Button ===== */
+.magic-btn {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #DDA0DD 0%, #EDC0ED 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.magic-btn:active {
+  transform: scale(0.98);
+}
+
+.magic-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.magic-icon {
+  font-size: 2rem;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+}
+
+.magic-label {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Tempo Control ===== */
+.tempo-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.tempo-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.tempo-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  max-width: 300px;
+}
+
+.tempo-icon {
+  font-size: 1.5rem;
+}
+
+.tempo-slider input[type="range"] {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--radius-sm);
+  background: #e0e0e0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.tempo-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.tempo-slider input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.tempo-display {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-blue);
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ===== Responsive Design ===== */
+@media (min-width: 768px) {
+  .instrument-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 320px) {
+  .game-container {
+    padding-top: 60px;
+    padding: var(--spacing-xs);
+  }
+
+  .game-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .instrument-btn {
+    min-height: 100px;
+  }
+
+  .instrument-icon {
+    font-size: 2.5rem;
+  }
+
+  .instrument-name {
+    font-size: 0.9rem;
+  }
+
+  .control-btn {
+    width: 70px;
+    height: 70px;
+  }
+
+  .tempo-slider {
+    max-width: 250px;
+  }
+}
+
+/* ===== Utility Classes ===== */
+.hidden {
+  display: none !important;
+}
