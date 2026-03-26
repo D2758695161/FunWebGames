@@ -16,7 +16,7 @@
 | 5 | Counting Garden | Done | #7 | 2026-03-18 |
 | 6 | Letter Explorer | Done | #9 | 2026-03-25 |
 | 7 | Music Maker | Done | #10 | 2026-03-25 |
-| 8 | Maze Runner | In Progress | #11 | 2026-03-26 |
+| 8 | Maze Runner | Ready for Test | #11 | 2026-03-26 |
 | 9 | Star Catcher | Ready for Dev | #12 | 2026-03-26 |
 | 10 | Dress Up | Ready for Dev | #13 | 2026-03-26 |
 
@@ -41,7 +41,7 @@
 
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
-| 11 | Implement Maze Runner Puzzle Game | in-progress, feature, game | In Progress (assigned: TechGuyTest) |
+| 11 | Implement Maze Runner Puzzle Game | ready-for-test, feature, game | Ready for Test |
 | 12 | Implement Star Catcher Coordination Game | ready-for-dev, feature, game | Ready for Dev |
 | 13 | Implement Dress Up Creative Game | ready-for-dev, feature, game | Ready for Dev |
 | 14 | Milestone: All 10 Games Complete and Playable | milestone | Milestone |
@@ -49,12 +49,12 @@
 ## Notes
 
 - 7 games fully implemented and tested: Color Match, Animal Puzzle, Bubble Pop, Shape Builder, Counting Garden, Letter Explorer, Music Maker
-- Maze Runner (#11) is in progress (assigned to TechGuyTest)
+- Maze Runner (#11) passed code review, ready for testing
 - 2 games ready for development: Star Catcher (#12), Dress Up (#13)
 - All 10 games have implementation files (index.html, script.js, style.css) in git
 - Milestone issue #14 tracks overall progress toward 10 complete games
-- Developer Agent should pick up #12 or #13 next (whichever is oldest)
-- Code Reviewer Agent should review #11 after dev completes
+- Tester Agent should pick up #11 next (verify gameplay in browser)
+- Developer Agent should pick up #12 or #13 next (oldest ready-for-dev)
 - PM Agent will not create new issues until milestone #14 is closed (per AWR-2)
 
 ## Implementation Status Summary
@@ -67,8 +67,8 @@
 - Counting Garden ✅ (Done - #7)
 - Letter Explorer ✅ (Done - #9)
 - Music Maker ✅ (Done - #10)
-- Maze Runner ✅ (In Progress - #11)
+- Maze Runner ✅ (Ready for Test - #11)
 - Star Catcher ✅ (Ready for Dev - #12)
 - Dress Up ✅ (Ready for Dev - #13)
 
-**All 10 games implemented, 7 tested and done, 1 in progress, 2 ready for dev**
+**All 10 games implemented, 7 tested and done, 1 ready for test, 2 ready for dev**
