@@ -3,7 +3,7 @@
 ## Status: ALL 10 GAMES COMPLETE! 🎉
 
 **Last Updated**: 2026-03-26
-**Open Issues**: 1
+**Open Issues**: 2
 **Closed Issues**: 15
 **Milestone**: #14 - All 10 Games Complete and Playable ✅ CLOSED
 
@@ -41,9 +41,10 @@
 
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
-| 16 | Add Test Automation Scripts | enhancement, ready-for-review | In review |
+| 16 | Add Test Automation Scripts | enhancement, ready-for-test | Ready for test |
+| 17 | Add LocalStorage High Score System to Games | enhancement, in-progress | In progress |
 
-**Total**: 1 open issue
+**Total**: 2 open issues
 
 ## Notes
 
@@ -52,8 +53,9 @@
 - All 10 games have implementation files (index.html, script.js, style.css) in git
 - All games have passed code review and testing
 - Milestone issue #14 CLOSED - PROJECT COMPLETE ✅
-- Issue #16 open: Add Test Automation Scripts (enhancement, ready-for-review)
-- All core requirements fulfilled - enhancement being reviewed
+- Issue #16: Add Test Automation Scripts (enhancement, ready-for-test)
+- Issue #17: Add LocalStorage High Score System (enhancement, in-progress)
+- All core requirements fulfilled - enhancements being processed
 
 ## Implementation Status Summary
 
