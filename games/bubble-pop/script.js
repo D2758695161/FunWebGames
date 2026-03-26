@@ -436,11 +436,35 @@ function endGame() {
     cancelAnimationFrame(state.animationFrame);
   }
   
+  // Check and save high score (higher is better)
+  const mode = state.mode;
+  const metricKey = `score-${mode}`;
+  const isNewRecord = HighScore.set('bubble-pop', metricKey, state.score, 'high');
+  
   playSound('win');
   createConfetti();
   
   setTimeout(() => {
     finalScoreDisplay.textContent = state.score;
+    
+    // Display best score
+    const bestScoreDisplay = document.getElementById('best-score-display');
+    const bestScore = HighScore.get('bubble-pop', metricKey);
+    if (bestScore !== null) {
+      const modeLabel = mode.charAt(0).toUpperCase() + mode.slice(1);
+      if (isNewRecord && state.score === bestScore) {
+        bestScoreDisplay.textContent = `🏆 New Record! Best (${modeLabel}): ${bestScore}`;
+        bestScoreDisplay.style.color = 'var(--color-red)';
+        bestScoreDisplay.style.fontWeight = 'bold';
+      } else {
+        bestScoreDisplay.textContent = `Best (${modeLabel}): ${bestScore}`;
+        bestScoreDisplay.style.color = 'var(--text-light)';
+        bestScoreDisplay.style.fontWeight = 'normal';
+      }
+    } else {
+      bestScoreDisplay.textContent = '';
+    }
+    
     celebrationModal.classList.remove('hidden');
   }, 500);
 }

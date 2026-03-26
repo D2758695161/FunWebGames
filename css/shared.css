@@ -368,6 +368,32 @@ p {
   display: none !important;
 }
 
+/* ===== Page Footer ===== */
+.page-footer {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.btn--small {
+  min-width: auto;
+  min-height: auto;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.875rem;
+}
+
+.btn--secondary {
+  background: var(--text-light);
+  color: white;
+  border: 2px solid var(--text-light);
+}
+
+.btn--secondary:hover,
+.btn--secondary:active {
+  background: var(--text-dark);
+  border-color: var(--text-dark);
+}
+
 /* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
   *,

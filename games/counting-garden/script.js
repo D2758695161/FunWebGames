@@ -327,7 +327,29 @@ function updateRoundDisplay() {
 
 // ===== Game End =====
 function endGame() {
+  // Check and save high score (higher is better)
+  const metricKey = 'stars';
+  const isNewRecord = HighScore.set('counting-garden', metricKey, state.stars, 'high');
+  
   document.getElementById('final-stars').textContent = state.stars;
+  
+  // Display best score
+  const bestStarsDisplay = document.getElementById('best-stars-display');
+  const bestScore = HighScore.get('counting-garden', metricKey);
+  if (bestScore !== null) {
+    if (isNewRecord && state.stars === bestScore) {
+      bestStarsDisplay.textContent = `🏆 New Record! Best: ${bestScore} stars`;
+      bestStarsDisplay.style.color = 'var(--color-red)';
+      bestStarsDisplay.style.fontWeight = 'bold';
+    } else {
+      bestStarsDisplay.textContent = `Best: ${bestScore} stars`;
+      bestStarsDisplay.style.color = 'var(--text-light)';
+      bestStarsDisplay.style.fontWeight = 'normal';
+    }
+  } else {
+    bestStarsDisplay.textContent = '';
+  }
+  
   completionModal.classList.remove('hidden');
   playSound('celebration');
   createConfetti();

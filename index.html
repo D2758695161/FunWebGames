@@ -87,6 +87,12 @@
     </a>
   </main>
 
+  <!-- Footer with High Score Reset -->
+  <footer class="page-footer">
+    <button id="reset-scores-btn" class="btn btn--small btn--secondary">🔄 Reset Scores</button>
+  </footer>
+
+  <script src="js/highscore.js"></script>
   <script>
     // Add playful sound effects on card click (GR-3: Audio & Feedback)
     document.querySelectorAll('.game-card').forEach(card => {
@@ -113,6 +119,26 @@
         }
       });
     });
+
+    // Reset Scores Button
+    const resetScoresBtn = document.getElementById('reset-scores-btn');
+    if (resetScoresBtn) {
+      resetScoresBtn.addEventListener('click', () => {
+        const scores = HighScore.getAll();
+        const scoreCount = Object.keys(scores).length;
+        
+        if (scoreCount === 0) {
+          alert('No scores to reset! 🎮');
+          return;
+        }
+        
+        const confirmed = confirm('Reset all high scores? This cannot be undone.');
+        if (confirmed) {
+          HighScore.reset();
+          alert('All scores reset! 🎉');
+        }
+      });
+    }
   </script>
 </body>
 </html>

@@ -473,6 +473,31 @@ function showGameOver() {
     finalScoreDisplay.appendChild(star);
   }
   
+  // Check and save high score (higher is better)
+  const metricKey = 'stars';
+  const isNewRecord = HighScore.set('star-catcher', metricKey, score, 'high');
+  
+  // Display best score
+  const bestScoreDisplay = document.getElementById('best-score-display');
+  const bestScore = HighScore.get('star-catcher', metricKey);
+  if (bestScore !== null) {
+    if (isNewRecord && score === bestScore) {
+      bestScoreDisplay.textContent = '🏆 New Record! Best: ' + '⭐'.repeat(bestScore);
+      bestScoreDisplay.style.color = 'var(--color-red)';
+      bestScoreDisplay.style.fontWeight = 'bold';
+      bestScoreDisplay.style.fontSize = '1.25rem';
+      bestScoreDisplay.style.marginTop = 'var(--spacing-sm)';
+    } else {
+      bestScoreDisplay.textContent = 'Best: ' + '⭐'.repeat(bestScore);
+      bestScoreDisplay.style.color = 'var(--text-light)';
+      bestScoreDisplay.style.fontWeight = 'normal';
+      bestScoreDisplay.style.fontSize = '1rem';
+      bestScoreDisplay.style.marginTop = 'var(--spacing-sm)';
+    }
+  } else {
+    bestScoreDisplay.textContent = '';
+  }
+  
   gameOverScreen.classList.remove('hidden');
   playSound('gameover');
 }

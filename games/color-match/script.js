@@ -347,12 +347,36 @@ function handleWin() {
   state.isGameActive = false;
   clearInterval(state.timerInterval);
   
+  // Check and save high score (lower moves is better)
+  const difficulty = state.difficulty;
+  const metricKey = `moves-${difficulty}`;
+  const isNewRecord = HighScore.set('color-match', metricKey, state.moves, 'low');
+  
   playSound('win');
   createConfetti();
   
   setTimeout(() => {
     finalTimeDisplay.textContent = `${state.time}s`;
     finalMovesDisplay.textContent = state.moves;
+    
+    // Display best score
+    const bestMovesDisplay = document.getElementById('best-moves-display');
+    const bestScore = HighScore.get('color-match', metricKey);
+    if (bestScore !== null) {
+      const difficultyLabel = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+      if (isNewRecord && state.moves === bestScore) {
+        bestMovesDisplay.textContent = `🏆 New Record! Best (${difficultyLabel}): ${bestScore} moves`;
+        bestMovesDisplay.style.color = 'var(--color-red)';
+        bestMovesDisplay.style.fontWeight = 'bold';
+      } else {
+        bestMovesDisplay.textContent = `Best (${difficultyLabel}): ${bestScore} moves`;
+        bestMovesDisplay.style.color = 'var(--text-light)';
+        bestMovesDisplay.style.fontWeight = 'normal';
+      }
+    } else {
+      bestMovesDisplay.textContent = '';
+    }
+    
     celebrationModal.classList.remove('hidden');
   }, 500);
 }
