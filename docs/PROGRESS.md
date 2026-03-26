@@ -4,7 +4,7 @@
 
 **Last Updated**: 2026-03-26
 **Open Issues**: 4
-**Closed Issues**: 16
+**Closed Issues**: 17
 **Milestone**: #14 - All 10 Games Complete and Playable ✅ CLOSED
 
 | # | Game | Status | Issues | Last Updated |
@@ -42,9 +42,9 @@
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
 | 17 | Add LocalStorage High Score System to Games | enhancement, ready-for-review | Ready for review |
-| 18 | Add High Scores to Remaining 6 Games | enhancement, ready-for-dev | Ready for dev |
-| 19 | Add High Scores to Remaining 4 Games | enhancement, ready-for-test | Ready for test |
-| 20 | Add Accessibility Improvements Across All Games | enhancement, ready-for-review | Ready for review |
+| 19 | Add High Scores to Remaining 4 Games | enhancement, ready-for-dev | Ready for dev |
+| 20 | Add Accessibility Improvements Across All Games | enhancement, ready-for-test | Ready for test |
+| 21 | Add Help/Tutorial Modals to All Games | enhancement, ready-for-review | Ready for review |
 
 **Total**: 4 open issues
 
@@ -57,9 +57,10 @@
 - Milestone issue #14 CLOSED - PROJECT COMPLETE ✅
 - Issue #16: Add Test Automation Scripts (enhancement) — CLOSED ✅
 - Issue #17: Add LocalStorage High Score System (enhancement, ready-for-review)
-- Issue #18: Add High Scores to Remaining 6 Games (enhancement, ready-for-dev)
-- Issue #19: Add High Scores to Remaining 4 Games (enhancement, ready-for-test)
-- Issue #20: Add Accessibility Improvements (enhancement, ready-for-review)
+- Issue #18: Add High Scores to Remaining 6 Games (enhancement) — CLOSED ✅
+- Issue #19: Add High Scores to Remaining 4 Games (enhancement, ready-for-dev)
+- Issue #20: Add Accessibility Improvements (enhancement, ready-for-test)
+- Issue #21: Add Help/Tutorial Modals (enhancement, ready-for-review)
 - All core requirements fulfilled - enhancements being processed
 
 ## Implementation Status Summary
