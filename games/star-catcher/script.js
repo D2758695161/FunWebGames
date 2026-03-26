@@ -732,5 +732,16 @@ function playSound(type) {
 
 // ===== Start =====
 init();
+
+// Help Button Setup
+const helpBtn = document.getElementById('help-btn');
+if (helpBtn) {
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('⭐', 'Catch the falling stars in your basket!');
+  });
+  
+  HelpModal.showIfFirstTime('star-catcher', '⭐', 'Catch the falling stars in your basket!');
+}
+
 // Auto-start game after a brief delay
 setTimeout(startGame, 500);

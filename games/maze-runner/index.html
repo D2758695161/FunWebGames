@@ -39,6 +39,7 @@
   <!-- Game Screen -->
   <main class="game-container hidden" id="game-screen">
     <div class="game-info">
+      <button class="help-btn" id="help-btn" aria-label="Show help" title="Help" style="position: absolute; top: var(--spacing-md); right: var(--spacing-md);">❓</button>
       <div class="maze-counter">Maze <span id="current-maze">1</span> of <span id="total-mazes">10</span></div>
       <div class="star-counter">⭐ <span id="stars-collected">0</span></div>
       <div class="timer">⏳ <span id="timer">0:00</span></div>
@@ -73,6 +74,7 @@
   </main>
 
   <script src="../../js/highscore.js"></script>
+  <script src="../../js/help-modal.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

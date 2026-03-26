@@ -107,9 +107,21 @@ function init() {
 
   document.getElementById('btn-play-again').addEventListener('click', restartGame);
   setupAudio();
+  setupHelp();
 
   startGame();
   console.log('Counting Garden initialized!');
+}
+
+function setupHelp() {
+  const helpBtn = document.getElementById('help-btn');
+  if (!helpBtn) return;
+  
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('🌸', 'Count the objects and pick the right number!');
+  });
+  
+  HelpModal.showIfFirstTime('counting-garden', '🌸', 'Count the objects and pick the right number!');
 }
 
 function setupAudio() {

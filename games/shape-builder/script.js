@@ -222,6 +222,7 @@ function init() {
   setupCanvas();
   setupButtons();
   setupAudio();
+  setupHelp();
 
   // Load first level
   loadLevel(0);
@@ -289,6 +290,17 @@ function setupAudio() {
   document.getElementById('sound-chime').src = 'assets/sounds/chime.mp3';
   document.getElementById('sound-boop').src = 'assets/sounds/boop.mp3';
   document.getElementById('sound-celebration').src = 'assets/sounds/celebration.mp3';
+}
+
+function setupHelp() {
+  const helpBtn = document.getElementById('help-btn');
+  if (!helpBtn) return;
+  
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('🔷', 'Drag shapes to build the picture!');
+  });
+  
+  HelpModal.showIfFirstTime('shape-builder', '🔷', 'Drag shapes to build the picture!');
 }
 
 // ===== Level Management =====

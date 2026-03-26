@@ -846,3 +846,13 @@ function showCompletion(allDone) {
 
 // ===== Initialize =====
 resizeCanvas();
+
+// Help Button Setup
+const helpBtn = document.getElementById('help-btn');
+if (helpBtn) {
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('🗺️', 'Guide your friend to the goal!');
+  });
+  
+  HelpModal.showIfFirstTime('maze-runner', '🗺️', 'Guide your friend to the goal!');
+}

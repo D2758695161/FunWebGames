@@ -275,8 +275,20 @@ function initGame() {
     longestSequenceDisplay.textContent = longestSequence;
   }
   
+  setupHelp();
   updateTempo();
   updateStatus('ready', 'Ready to Play!');
+}
+
+function setupHelp() {
+  const helpBtn = document.getElementById('help-btn');
+  if (!helpBtn) return;
+  
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('🎵', 'Tap instruments to make music!');
+  });
+  
+  HelpModal.showIfFirstTime('music-maker', '🎵', 'Tap instruments to make music!');
 }
 
 initGame();

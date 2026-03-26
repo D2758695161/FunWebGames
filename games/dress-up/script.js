@@ -612,3 +612,13 @@ function playSound(type) {
 
 // ===== Initialize =====
 // Game starts when user selects character and clicks start
+
+// Help Button Setup (called after game screen is shown)
+const helpBtn = document.getElementById('help-btn');
+if (helpBtn) {
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('👗', 'Drag clothes to dress up the model!');
+  });
+  
+  HelpModal.showIfFirstTime('dress-up', '👗', 'Drag clothes to dress up the model!');
+}

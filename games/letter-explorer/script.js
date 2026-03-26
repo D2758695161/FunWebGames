@@ -84,7 +84,19 @@ function init() {
   resizeCanvas();
   updateLetterDisplay();
   setupEventListeners();
+  setupHelp();
   window.addEventListener("resize", resizeCanvas);
+}
+
+function setupHelp() {
+  const helpBtn = document.getElementById('help-btn');
+  if (!helpBtn) return;
+  
+  helpBtn.addEventListener('click', () => {
+    HelpModal.show('🔤', 'Trace the letter with your finger!');
+  });
+  
+  HelpModal.showIfFirstTime('letter-explorer', '🔤', 'Trace the letter with your finger!');
 }
 
 // ===== Letter Carousel =====

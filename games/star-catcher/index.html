@@ -16,6 +16,7 @@
 
   <main class="game-container" role="main">
     <div class="game-area">
+      <button class="help-btn" id="help-btn" aria-label="Show help" title="Help" style="position: absolute; top: var(--spacing-md); right: var(--spacing-md); z-index: 100;">❓</button>
       <canvas id="game-canvas"></canvas>
       
       <div class="score-display" id="score-display">
@@ -48,6 +49,7 @@
   </main>
 
   <script src="../../js/highscore.js"></script>
+  <script src="../../js/help-modal.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
