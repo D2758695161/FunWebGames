@@ -178,6 +178,18 @@ let timerInterval = null;
 let startTime = null;
 let isDragging = false;
 
+// Animation state
+let playerBounceOffset = 0;
+let playerBounceDirection = 0;
+let isBouncing = false;
+let goalPulsePhase = 0;
+let confettiParticles = [];
+let isAnimatingConfetti = false;
+
+// Music state
+let isMusicEnabled = false;
+let musicInterval = null;
+
 // ===== Canvas Setup =====
 const canvas = document.getElementById('maze-canvas');
 const ctx = canvas.getContext('2d');
@@ -196,6 +208,7 @@ const arrowBtns = document.querySelectorAll('.arrow-btn');
 const completionScreen = document.getElementById('completion-screen');
 const finalStarsEl = document.getElementById('final-stars');
 const nextBtn = document.getElementById('next-btn');
+const musicToggle = document.getElementById('music-toggle');
 
 // ===== Character Selection =====
 characterBtns.forEach(btn => {
@@ -213,6 +226,55 @@ startBtn.addEventListener('click', () => {
   gameScreen.classList.remove('hidden');
   startMaze(currentMazeIndex);
 });
+
+// Music toggle
+musicToggle.addEventListener('click', () => {
+  isMusicEnabled = !isMusicEnabled;
+  if (isMusicEnabled) {
+    musicToggle.textContent = '🔊';
+    startBackgroundMusic();
+  } else {
+    musicToggle.textContent = '🔇';
+    stopBackgroundMusic();
+  }
+  playSound('pop');
+});
+
+function startBackgroundMusic() {
+  if (musicInterval) return;
+  
+  // Simple calming background melody
+  const notes = [523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33];
+  let noteIndex = 0;
+  
+  musicInterval = setInterval(() => {
+    if (!isMusicEnabled) return;
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = notes[noteIndex % notes.length];
+    oscillator.type = 'sine';
+    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+    
+    noteIndex++;
+  }, 500);
+}
+
+function stopBackgroundMusic() {
+  if (musicInterval) {
+    clearInterval(musicInterval);
+    musicInterval = null;
+  }
+}
 
 // ===== Maze Setup =====
 function startMaze(index) {
@@ -235,6 +297,11 @@ function startMaze(index) {
   resizeCanvas();
   drawMaze();
   completionScreen.classList.add('hidden');
+  
+  // Resume background music if enabled
+  if (isMusicEnabled && !musicInterval) {
+    startBackgroundMusic();
+  }
 }
 
 function resizeCanvas() {
@@ -282,33 +349,33 @@ function drawMaze() {
     }
   }
   
-  // Draw stars
+  // Draw stars with sparkle animation
+  const time = Date.now();
   maze.stars.forEach((star, i) => {
     if (!collectedStars.includes(i)) {
       const starX = 20 + star.x * cellSize + cellSize / 2;
       const starY = 20 + star.y * cellSize + cellSize / 2;
-      drawStar(starX, starY, cellSize * 0.4);
+      drawStar(starX, starY, cellSize * 0.4, true);
     }
   });
   
-  // Draw goal
+  // Draw goal with pulse animation
   const goalX = 20 + maze.goal.x * cellSize + cellSize / 2;
   const goalY = 20 + maze.goal.y * cellSize + cellSize / 2;
-  ctx.font = `${cellSize * 0.8}px "Comic Sans MS", sans-serif`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(goal.emoji, goalX, goalY);
+  drawGoal(goalX, goalY, goal.emoji);
   
-  // Draw player
+  // Draw player with bounce animation
   const playerX = 20 + playerPos.x * cellSize + cellSize / 2;
   const playerY = 20 + playerPos.y * cellSize + cellSize / 2;
   const playerEmoji = selectedCharacter === 'bunny' ? '🐰' : 
                       selectedCharacter === 'puppy' ? '🐶' : '🐱';
-  ctx.font = `${cellSize * 0.7}px "Comic Sans MS", sans-serif`;
-  ctx.fillText(playerEmoji, playerX, playerY);
+  drawPlayer(playerX, playerY, playerEmoji);
+  
+  // Draw confetti if animating
+  drawConfetti();
 }
 
-function drawStar(cx, cy, outerRadius) {
+function drawStar(cx, cy, outerRadius, animate = false) {
   const innerRadius = outerRadius * 0.5;
   const spikes = 5;
   let rot = Math.PI / 2 * 3;
@@ -316,30 +383,134 @@ function drawStar(cx, cy, outerRadius) {
   let y = cy;
   const step = Math.PI / spikes;
 
+  // Sparkle animation
+  let scale = 1;
+  let alpha = 1;
+  if (animate) {
+    const time = Date.now() / 200;
+    scale = 1 + Math.sin(time) * 0.2;
+    alpha = 0.5 + Math.sin(time * 2) * 0.5;
+  }
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(scale, scale);
+  ctx.globalAlpha = alpha;
+
   ctx.beginPath();
-  ctx.moveTo(cx, cy - outerRadius);
+  ctx.moveTo(0, -outerRadius);
   for (let i = 0; i < spikes; i++) {
-    x = cx + Math.cos(rot) * outerRadius;
-    y = cy + Math.sin(rot) * outerRadius;
+    x = Math.cos(rot) * outerRadius;
+    y = Math.sin(rot) * outerRadius;
     ctx.lineTo(x, y);
     rot += step;
 
-    x = cx + Math.cos(rot) * innerRadius;
-    y = cy + Math.sin(rot) * innerRadius;
+    x = Math.cos(rot) * innerRadius;
+    y = Math.sin(rot) * innerRadius;
     ctx.lineTo(x, y);
     rot += step;
   }
-  ctx.lineTo(cx, cy - outerRadius);
+  ctx.lineTo(0, -outerRadius);
   ctx.closePath();
   ctx.fillStyle = '#FFD700';
   ctx.fill();
   ctx.strokeStyle = '#FFA500';
   ctx.lineWidth = 2;
   ctx.stroke();
+  
+  ctx.restore();
+}
+
+// Draw goal with pulse animation
+function drawGoal(cx, cy, emoji) {
+  const time = Date.now() / 500;
+  const pulse = 1 + Math.sin(time) * 0.1;
+  
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(pulse, pulse);
+  ctx.font = `${cellSize * 0.8}px "Comic Sans MS", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(emoji, 0, 0);
+  ctx.restore();
+}
+
+// Draw player with bounce animation
+function drawPlayer(cx, cy, emoji) {
+  let offsetY = 0;
+  if (isBouncing) {
+    playerBounceOffset += playerBounceDirection * 2;
+    offsetY = -Math.abs(playerBounceOffset);
+    if (playerBounceOffset >= 8) {
+      playerBounceDirection = -2;
+    }
+    if (playerBounceOffset <= 0) {
+      playerBounceDirection = 0;
+      isBouncing = false;
+      offsetY = 0;
+    }
+  }
+  
+  ctx.font = `${cellSize * 0.7}px "Comic Sans MS", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(emoji, cx, cy + offsetY);
+}
+
+// Confetti animation
+function updateConfetti() {
+  if (!isAnimatingConfetti) return;
+  
+  confettiParticles = confettiParticles.filter(p => p.y > -50);
+  confettiParticles.forEach(p => {
+    p.y += p.speed;
+    p.rotation += p.rotationSpeed;
+    p.x += Math.sin(p.y / 30) * 2;
+  });
+  
+  if (confettiParticles.length > 0) {
+    requestAnimationFrame(updateConfetti);
+    drawMaze();
+  } else {
+    isAnimatingConfetti = false;
+  }
+}
+
+function drawConfetti() {
+  if (!isAnimatingConfetti) return;
+  
+  const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#DDA0DD', '#FFB347'];
+  
+  confettiParticles.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation);
+    ctx.fillStyle = colors[p.colorIndex % colors.length];
+    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+    ctx.restore();
+  });
+}
+
+function startConfetti() {
+  confettiParticles = [];
+  for (let i = 0; i < 50; i++) {
+    confettiParticles.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * 100,
+      size: 8 + Math.random() * 8,
+      speed: 2 + Math.random() * 3,
+      rotation: Math.random() * Math.PI * 2,
+      rotationSpeed: (Math.random() - 0.5) * 0.2,
+      colorIndex: Math.floor(Math.random() * 6)
+    });
+  }
+  isAnimatingConfetti = true;
+  updateConfetti();
 }
 
 // ===== Movement =====
-function movePlayer(dx, dy) {
+function movePlayer(dx, dy, animate = true) {
   const maze = mazes[currentMazeIndex];
   const newX = playerPos.x + dx;
   const newY = playerPos.y + dy;
@@ -347,12 +518,20 @@ function movePlayer(dx, dy) {
   // Check bounds
   if (newY < 0 || newY >= maze.grid.length || newX < 0 || newX >= maze.grid[0].length) {
     playSound('boop');
+    // Shake animation for wall collision
+    if (animate) {
+      shakePlayer();
+    }
     return;
   }
   
   // Check wall collision
   if (maze.grid[newY][newX] === 1) {
     playSound('boop');
+    // Shake animation for wall collision
+    if (animate) {
+      shakePlayer();
+    }
     return;
   }
   
@@ -360,6 +539,13 @@ function movePlayer(dx, dy) {
   playerPos.x = newX;
   playerPos.y = newY;
   playSound('step');
+  
+  // Bounce animation
+  if (animate) {
+    isBouncing = true;
+    playerBounceOffset = 0;
+    playerBounceDirection = 2;
+  }
   
   // Check star collection
   maze.stars.forEach((star, i) => {
@@ -379,6 +565,33 @@ function movePlayer(dx, dy) {
   drawMaze();
 }
 
+// Shake animation for collision feedback
+let shakeOffset = 0;
+let shakeDirection = 0;
+let isShaking = false;
+
+function shakePlayer() {
+  isShaking = true;
+  shakeOffset = 0;
+  shakeDirection = 3;
+  
+  const shakeInterval = setInterval(() => {
+    shakeOffset += shakeDirection;
+    if (shakeOffset >= 6) {
+      shakeDirection = -3;
+    }
+    if (shakeOffset <= -6) {
+      shakeDirection = 3;
+    }
+    if (Math.abs(shakeOffset) < 3 && shakeDirection < 0) {
+      clearInterval(shakeInterval);
+      isShaking = false;
+      shakeOffset = 0;
+    }
+    drawMaze();
+  }, 16);
+}
+
 // Arrow controls
 arrowBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -392,8 +605,10 @@ arrowBtns.forEach(btn => {
   });
 });
 
-// Drag controls
+// Drag controls - improved with path following
 let dragStartPos = null;
+let lastDragPos = null;
+let dragThreshold = 20; // Minimum drag distance to trigger movement
 
 canvas.addEventListener('mousedown', handleDragStart);
 canvas.addEventListener('touchstart', handleDragStart, {passive: false});
@@ -409,31 +624,44 @@ function handleDragStart(e) {
   isDragging = true;
   const pos = getCanvasPosition(e);
   dragStartPos = pos;
+  lastDragPos = pos;
 }
 
 function handleDragMove(e) {
   if (!isDragging) return;
   e.preventDefault();
+  
+  const pos = getCanvasPosition(e);
+  if (!lastDragPos) return;
+  
+  const dx = pos.x - lastDragPos.x;
+  const dy = pos.y - lastDragPos.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  
+  // Only move if dragged far enough
+  if (distance < dragThreshold) return;
+  
+  // Determine primary direction
+  let moveDx = 0, moveDy = 0;
+  if (Math.abs(dx) > Math.abs(dy)) {
+    moveDx = dx > 0 ? 1 : -1;
+  } else {
+    moveDy = dy > 0 ? 1 : -1;
+  }
+  
+  // Try to move (with animation disabled for smooth drag)
+  movePlayer(moveDx, moveDy, false);
+  lastDragPos = pos;
 }
 
 function handleDragEnd(e) {
   if (!isDragging) return;
   isDragging = false;
-  
-  const pos = getCanvasPosition(e);
-  if (!dragStartPos) return;
-  
-  const dx = pos.x - dragStartPos.x;
-  const dy = pos.y - dragStartPos.y;
-  
-  // Determine primary direction
-  if (Math.abs(dx) > Math.abs(dy)) {
-    movePlayer(dx > 0 ? 1 : -1, 0);
-  } else {
-    movePlayer(0, dy > 0 ? 1 : -1);
-  }
-  
   dragStartPos = null;
+  lastDragPos = null;
+  
+  // Redraw to ensure clean state
+  drawMaze();
 }
 
 function getCanvasPosition(e) {
@@ -458,6 +686,7 @@ function getCanvasPosition(e) {
 function completeMaze() {
   stopTimer();
   playSound('celebration');
+  startConfetti();
   finalStarsEl.textContent = starsCollected;
   setTimeout(() => {
     completionScreen.classList.remove('hidden');
@@ -557,6 +786,7 @@ function playSound(type) {
 function showCompletion(allDone) {
   if (allDone) {
     // All mazes complete
+    stopBackgroundMusic();
     finalStarsEl.textContent = starsCollected;
     completionScreen.classList.remove('hidden');
     document.querySelector('.completion-message h2').textContent = '🎉 Amazing! All Mazes Complete! 🎉';
@@ -572,6 +802,8 @@ function showCompletion(allDone) {
       document.querySelector('.completion-message h2').textContent = '🎉 You did it! 🎉';
       nextBtn.textContent = 'Next Maze →';
       nextBtn.onclick = () => startMaze(currentMazeIndex + 1);
+      isMusicEnabled = false;
+      musicToggle.textContent = '🔇';
     };
   }
 }
