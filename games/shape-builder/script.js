@@ -206,6 +206,8 @@ let palette, canvas, targetDisplay, levelDisplay, trashZone, completionModal;
 
 // ===== Initialization =====
 function init() {
+  SoundToggle.init();
+  
   // Cache DOM elements
   palette = document.getElementById('palette');
   canvas = document.getElementById('game-canvas');
@@ -615,6 +617,8 @@ function createConfetti() {
 }
 
 function playSound(name) {
+  if (SoundToggle.isMuted()) return;
+  
   const audio = document.getElementById(`sound-${name}`);
   if (audio) {
     audio.currentTime = 0;

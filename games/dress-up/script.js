@@ -138,6 +138,8 @@ startBtn.addEventListener('click', () => {
 
 // ===== Game Initialization =====
 function initializeGame() {
+  SoundToggle.init();
+  
   characterBase.textContent = characters[selectedCharacter].base;
   switchCategory('hats');
   updateCharacterLayers();
@@ -516,6 +518,8 @@ function saveOutfit() {
 
 // ===== Audio =====
 function playSound(type) {
+  if (SoundToggle.isMuted()) return;
+  
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();

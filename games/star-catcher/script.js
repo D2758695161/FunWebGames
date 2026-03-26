@@ -64,6 +64,8 @@ const arrowBtns = document.querySelectorAll('.arrow-btn');
 
 // ===== Initialization =====
 function init() {
+  SoundToggle.init();
+  
   resizeCanvas();
   resetGame();
   setupEventListeners();
@@ -625,6 +627,8 @@ update = function() {
 
 // ===== Audio =====
 function playSound(type) {
+  if (SoundToggle.isMuted()) return;
+  
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();

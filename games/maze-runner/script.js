@@ -758,6 +758,8 @@ function stopTimer() {
 
 // ===== Audio =====
 function playSound(type) {
+  if (SoundToggle.isMuted()) return;
+  
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
@@ -845,6 +847,7 @@ function showCompletion(allDone) {
 }
 
 // ===== Initialize =====
+SoundToggle.init();
 resizeCanvas();
 
 // Help Button Setup

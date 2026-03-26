@@ -49,6 +49,7 @@ function initAudio() {
 
 function playSound(type) {
   if (!audioContext) return;
+  if (SoundToggle.isMuted()) return;
   
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
@@ -124,6 +125,7 @@ function playSound(type) {
 
 // Initialize Game
 function initGame() {
+  SoundToggle.init();
   initAudio();
   setupModeSelector();
   setupRestartButton();

@@ -96,6 +96,8 @@ let garden, objectsContainer, questionText, optionsContainer, feedbackMessage, s
 
 // ===== Initialization =====
 function init() {
+  SoundToggle.init();
+  
   garden = document.getElementById('garden');
   objectsContainer = document.getElementById('objects-container');
   questionText = document.getElementById('question-text');
@@ -383,6 +385,8 @@ function createConfetti() {
 }
 
 function playSound(name) {
+  if (SoundToggle.isMuted()) return;
+  
   const audio = document.getElementById(`sound-${name}`);
   if (audio) {
     audio.currentTime = 0;

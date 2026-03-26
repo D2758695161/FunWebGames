@@ -80,6 +80,8 @@ function resizeCanvas() {
 
 // ===== Initialization =====
 function init() {
+  SoundToggle.init();
+  
   createLetterCarousel();
   resizeCanvas();
   updateLetterDisplay();
@@ -423,6 +425,8 @@ function showCelebration() {
 
 // ===== Audio =====
 function playSound(type) {
+  if (SoundToggle.isMuted()) return;
+  
   // Use Web Audio API for simple sounds
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioContext.createOscillator();

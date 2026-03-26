@@ -70,6 +70,8 @@ function initAudio() {
 }
 
 function playInstrumentSound(instrumentKey) {
+  if (SoundToggle.isMuted()) return;
+  
   initAudio();
   
   const instrument = instruments[instrumentKey];
@@ -268,6 +270,8 @@ document.addEventListener('keydown', (e) => {
 
 // Initialize
 function initGame() {
+  SoundToggle.init();
+  
   // Load best score from localStorage
   const bestScore = HighScore.get('music-maker', 'sequence');
   if (bestScore !== null && longestSequenceDisplay) {

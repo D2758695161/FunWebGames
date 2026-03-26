@@ -515,3 +515,36 @@ p {
   outline: 3px solid var(--color-orange);
   outline-offset: 2px;
 }
+
+/* ===== Sound Toggle Button ===== */
+.sound-toggle-btn {
+  background: transparent;
+  border: 2px solid var(--text-light);
+  border-radius: var(--radius-md);
+  width: var(--touch-target);
+  height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: var(--spacing-sm);
+}
+
+.sound-toggle-btn:hover,
+.sound-toggle-btn:active {
+  background: var(--bg-soft-blue);
+  border-color: var(--color-blue);
+  transform: scale(1.05);
+}
+
+.sound-toggle-btn:focus {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.sound-toggle-btn.muted {
+  border-color: var(--color-red);
+  background: var(--bg-soft-pink);
+}
