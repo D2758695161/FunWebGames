@@ -10,6 +10,7 @@ const state = {
   dragOffset: { x: 0, y: 0 },
   selectedShape: null,
   hintVisible: false,
+  moves: 0,
   levels: []
 };
 
@@ -295,6 +296,7 @@ function loadLevel(levelIndex) {
   state.currentLevel = levelIndex;
   state.shapesOnCanvas = [];
   state.hintVisible = false;
+  state.moves = 0;
   
   const level = state.levels[levelIndex];
   
@@ -445,6 +447,7 @@ function createShapeOnCanvas(type, color) {
   canvas.appendChild(el);
   shape.element = el;
   state.shapesOnCanvas.push(shape);
+  state.moves++;
   
   return shape;
 }
@@ -523,6 +526,32 @@ function checkLevelCompletion() {
 }
 
 function showCompletion() {
+  // Check and save high score (lower moves is better)
+  const levelNum = state.currentLevel + 1;
+  const metricKey = `moves-level-${levelNum}`;
+  const isNewRecord = HighScore.set('shape-builder', metricKey, state.moves, 'low');
+  
+  // Display moves and best score
+  const movesDisplay = document.getElementById('moves-display');
+  const bestMovesDisplay = document.getElementById('best-moves-display');
+  
+  movesDisplay.textContent = `Moves: ${state.moves}`;
+  
+  const bestScore = HighScore.get('shape-builder', metricKey);
+  if (bestScore !== null) {
+    if (isNewRecord && state.moves === bestScore) {
+      bestMovesDisplay.textContent = `🏆 New Record! Best: ${bestScore} moves`;
+      bestMovesDisplay.style.color = 'var(--color-red)';
+      bestMovesDisplay.style.fontWeight = 'bold';
+    } else {
+      bestMovesDisplay.textContent = `Best: ${bestScore} moves`;
+      bestMovesDisplay.style.color = 'var(--text-light)';
+      bestMovesDisplay.style.fontWeight = 'normal';
+    }
+  } else {
+    bestMovesDisplay.textContent = '';
+  }
+  
   completionModal.classList.remove('hidden');
   playSound('celebration');
   createConfetti();

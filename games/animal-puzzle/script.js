@@ -14,7 +14,9 @@ const state = {
   },
   isDragging: false,
   draggedPiece: null,
-  dragOffset: { x: 0, y: 0 }
+  dragOffset: { x: 0, y: 0 },
+  time: 0,
+  timerInterval: null
 };
 
 // Animal Data with SVG paths
@@ -130,11 +132,14 @@ const animals = [
 const puzzleBoard = document.getElementById('puzzle-board');
 const piecePool = document.getElementById('piece-pool');
 const progressDisplay = document.getElementById('progress');
+const timerDisplay = document.getElementById('timer');
 const animalNameDisplay = document.getElementById('animal-name');
 const restartBtn = document.getElementById('restart-btn');
 const difficultyBtns = document.querySelectorAll('.difficulty-btn');
 const celebrationModal = document.getElementById('celebration-modal');
 const finalAnimalDisplay = document.getElementById('final-animal');
+const finalTimeDisplay = document.getElementById('final-time-display');
+const bestTimeDisplay = document.getElementById('best-time-display');
 const playAgainBtn = document.getElementById('play-again-btn');
 const confettiContainer = document.createElement('div');
 confettiContainer.id = 'confetti-container';
@@ -235,10 +240,17 @@ function startGame() {
   state.pieces = [];
   state.isDragging = false;
   state.draggedPiece = null;
+  state.time = 0;
+  
+  // Clear existing timer
+  if (state.timerInterval) {
+    clearInterval(state.timerInterval);
+  }
   
   celebrationModal.classList.add('hidden');
   puzzleBoard.classList.remove('animal-complete');
   confettiContainer.innerHTML = '';
+  timerDisplay.textContent = '0s';
   
   // Select random animal
   state.currentAnimal = animals[Math.floor(Math.random() * animals.length)];
@@ -250,6 +262,12 @@ function startGame() {
   
   updateProgress();
   generatePuzzle(level);
+  
+  // Start timer
+  state.timerInterval = setInterval(() => {
+    state.time++;
+    timerDisplay.textContent = `${state.time}s`;
+  }, 1000);
 }
 
 function updateProgress() {
@@ -459,11 +477,40 @@ function snapPieceToPosition(piece, row, col) {
 }
 
 function handleWin() {
+  // Stop timer
+  if (state.timerInterval) {
+    clearInterval(state.timerInterval);
+  }
+  
+  // Check and save high score (lower time is better)
+  const animal = state.currentAnimal.name.toLowerCase();
+  const metricKey = `time-${animal}`;
+  const isNewRecord = HighScore.set('animal-puzzle', metricKey, state.time, 'low');
+  
   playSound('win');
   puzzleBoard.classList.add('animal-complete', 'animal-bounce');
   createConfetti();
   
   setTimeout(() => {
+    finalTimeDisplay.textContent = `Time: ${state.time}s`;
+    
+    // Display best score
+    const bestScore = HighScore.get('animal-puzzle', metricKey);
+    if (bestScore !== null) {
+      const animalLabel = state.currentAnimal.name;
+      if (isNewRecord && state.time === bestScore) {
+        bestTimeDisplay.textContent = `🏆 New Record! Best (${animalLabel}): ${bestScore}s`;
+        bestTimeDisplay.style.color = 'var(--color-red)';
+        bestTimeDisplay.style.fontWeight = 'bold';
+      } else {
+        bestTimeDisplay.textContent = `Best (${animalLabel}): ${bestScore}s`;
+        bestTimeDisplay.style.color = 'var(--text-light)';
+        bestTimeDisplay.style.fontWeight = 'normal';
+      }
+    } else {
+      bestTimeDisplay.textContent = '';
+    }
+    
     celebrationModal.classList.remove('hidden');
   }, 500);
 }

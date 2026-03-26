@@ -28,6 +28,10 @@
           <span id="progress" class="stat-value">0/6</span>
         </div>
         <div class="stat">
+          <span class="stat-label">⏱️ Time:</span>
+          <span id="timer" class="stat-value">0s</span>
+        </div>
+        <div class="stat">
           <span class="stat-label">🐘 Animal:</span>
           <span id="animal-name" class="stat-value">Cat</span>
         </div>
@@ -51,12 +55,15 @@
         <div class="celebration">
           <h2 class="celebration__title">🎉 Puzzle Complete! 🎉</h2>
           <p class="celebration__message">You assembled the <span id="final-animal"></span>!</p>
+          <p class="celebration__stats" id="final-time-display"></p>
+          <p class="celebration__best" id="best-time-display"></p>
           <button id="play-again-btn" class="btn btn-primary">🎮 Play Again</button>
         </div>
       </div>
     </div>
   </main>
 
+  <script src="../../js/highscore.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
