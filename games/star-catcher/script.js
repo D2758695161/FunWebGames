@@ -43,6 +43,15 @@ const objectTypes = [
   { type: 'cloud', emoji: '☁️', points: 0, probability: 10, speed: 1.5, size: 40 }
 ];
 
+// Animation state
+let basketBounceOffset = 0;
+let basketBounceDirection = 0;
+let isBouncing = false;
+let sparkleParticles = [];
+let isAnimatingSparkles = false;
+let screenFlashColor = null;
+let screenFlashOpacity = 0;
+
 // ===== DOM Elements =====
 const scoreDisplay = document.getElementById('score-display');
 const timerDisplay = document.getElementById('timer-display');
@@ -94,10 +103,55 @@ function resetGame() {
 }
 
 // ===== Game Loop =====
+let countdownValue = 3;
+let countdownInterval = null;
+
 function startGame() {
   resetGame();
-  gameRunning = true;
+  gameRunning = false; // Don't start yet - show countdown first
   gameOverScreen.classList.add('hidden');
+  
+  // Show countdown
+  showCountdown();
+}
+
+function showCountdown() {
+  countdownValue = 3;
+  updateCountdownDisplay();
+  
+  countdownInterval = setInterval(() => {
+    countdownValue--;
+    if (countdownValue > 0) {
+      updateCountdownDisplay();
+      playSound('countdown');
+    } else if (countdownValue === 0) {
+      // "Go!"
+      updateCountdownDisplay();
+      playSound('go');
+      setTimeout(beginGame, 1000);
+    }
+  }, 1000);
+}
+
+function updateCountdownDisplay() {
+  // Draw countdown on canvas
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+  
+  ctx.font = 'bold 120px "Comic Sans MS", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#FFD700';
+  
+  if (countdownValue > 0) {
+    ctx.fillText(countdownValue.toString(), canvasWidth / 2, canvasHeight / 2);
+  } else {
+    ctx.fillText('GO!', canvasWidth / 2, canvasHeight / 2);
+  }
+}
+
+function beginGame() {
+  gameRunning = true;
   
   // Spawn objects every 1-2 seconds
   spawnInterval = setInterval(spawnObject, 1500);
@@ -129,6 +183,15 @@ function update() {
   fallingObjects.forEach(obj => {
     obj.y += obj.speed;
   });
+  
+  // Update sparkle particles
+  updateSparkles();
+  
+  // Update screen flash
+  if (screenFlashOpacity > 0) {
+    screenFlashOpacity -= 0.02;
+    if (screenFlashOpacity < 0) screenFlashOpacity = 0;
+  }
   
   // Remove objects that fell off screen
   fallingObjects = fallingObjects.filter(obj => {
@@ -162,17 +225,29 @@ function draw() {
   // Draw background stars
   drawBackgroundStars();
   
-  // Draw basket
+  // Draw basket with bounce animation
+  const bounceY = isBouncing ? basketBounceOffset : 0;
   ctx.font = `${basket.height}px "Comic Sans MS", sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(basket.emoji, basket.x, basket.y);
+  ctx.fillText(basket.emoji, basket.x, basket.y + bounceY);
   
   // Draw falling objects
   fallingObjects.forEach(obj => {
     ctx.font = `${obj.size}px "Comic Sans MS", sans-serif`;
     ctx.fillText(obj.emoji, obj.x, obj.y);
   });
+  
+  // Draw sparkle particles
+  drawSparkles();
+  
+  // Draw screen flash for rainbow star
+  if (screenFlashOpacity > 0) {
+    ctx.fillStyle = screenFlashColor;
+    ctx.globalAlpha = screenFlashOpacity;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctx.globalAlpha = 1;
+  }
 }
 
 function drawBackgroundStars() {
@@ -189,6 +264,82 @@ function drawBackgroundStars() {
     ctx.fill();
   }
   ctx.globalAlpha = 1;
+}
+
+// Sparkle particle system
+function createSparkles(x, y, count = 10, color = '#FFD700') {
+  for (let i = 0; i < count; i++) {
+    sparkleParticles.push({
+      x,
+      y,
+      vx: (Math.random() - 0.5) * 8,
+      vy: (Math.random() - 0.5) * 8 - 2,
+      life: 1.0,
+      decay: 0.02 + Math.random() * 0.02,
+      size: 4 + Math.random() * 4,
+      color
+    });
+  }
+}
+
+function updateSparkles() {
+  sparkleParticles = sparkleParticles.filter(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.2; // gravity
+    p.life -= p.decay;
+    return p.life > 0;
+  });
+  
+  if (sparkleParticles.length > 0) {
+    isAnimatingSparkles = true;
+  } else {
+    isAnimatingSparkles = false;
+  }
+}
+
+function drawSparkles() {
+  sparkleParticles.forEach(p => {
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// Basket bounce animation
+function bounceBasket() {
+  isBouncing = true;
+  basketBounceOffset = 0;
+  basketBounceDirection = -3;
+  
+  const bounceInterval = setInterval(() => {
+    basketBounceOffset += basketBounceDirection;
+    if (basketBounceOffset <= -12) {
+      basketBounceDirection = 3;
+    }
+    if (basketBounceOffset >= 0 && basketBounceDirection > 0) {
+      clearInterval(bounceInterval);
+      isBouncing = false;
+      basketBounceOffset = 0;
+    }
+  }, 16);
+}
+
+// Screen flash for rainbow star
+function flashScreen(color) {
+  screenFlashColor = color;
+  screenFlashOpacity = 0.5;
+  
+  const flashInterval = setInterval(() => {
+    screenFlashOpacity -= 0.05;
+    if (screenFlashOpacity <= 0) {
+      clearInterval(flashInterval);
+      screenFlashOpacity = 0;
+    }
+  }, 30);
 }
 
 // ===== Spawning =====
@@ -244,6 +395,21 @@ function catchObject(obj) {
     updateScoreDisplay();
     updateCounterDisplay();
     playSound(obj.type);
+    
+    // Visual feedback
+    bounceBasket();
+    
+    if (obj.type === 'rainbow') {
+      createSparkles(obj.x, obj.y, 20, '#FFD700');
+      createSparkles(obj.x, obj.y, 10, '#FF69B4');
+      flashScreen('rgba(255, 255, 255, 0.8)');
+    } else if (obj.type === 'moon') {
+      createSparkles(obj.x, obj.y, 8, '#FFF');
+    } else if (obj.type === 'planet') {
+      createSparkles(obj.x, obj.y, 8, '#4169E1');
+    } else {
+      createSparkles(obj.x, obj.y, 6, '#FFD700');
+    }
   }
 }
 
@@ -492,6 +658,24 @@ function playSound(type) {
       gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.3);
+      break;
+      
+    case 'countdown':
+      oscillator.frequency.value = 440;
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+      break;
+      
+    case 'go':
+      oscillator.frequency.value = 880;
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.5);
       break;
       
     case 'gameover':
