@@ -42,9 +42,9 @@
 | # | Title | Labels | Status |
 |---|-------|--------|--------|
 | 17 | Add LocalStorage High Score System to Games | enhancement, ready-for-review | Ready for review |
-| 21 | Add Help/Tutorial Modals to All Games | enhancement, ready-for-dev/review | Ready for dev/review |
-| 22 | Add Sound Effects Toggle to All Games | enhancement, ready-for-test | Ready for test |
-| 23 | Add Offline PWA Support | enhancement, ready-for-review | Ready for review |
+| 21 | Add Help/Tutorial Modals to All Games | enhancement, ready-for-review | Ready for review |
+| 22 | Add Sound Effects Toggle to All Games | enhancement, ready-for-dev/review | Ready for dev/review |
+| 23 | Add Offline PWA Support | enhancement, ready-for-review/test | Ready for review/test |
 
 **Total**: 4 open issues
 
@@ -60,9 +60,9 @@
 - Issue #18: Add High Scores to Remaining 6 Games (enhancement) — CLOSED ✅
 - Issue #19: Add High Scores to Remaining 4 Games (enhancement) — CLOSED ✅
 - Issue #20: Add Accessibility Improvements (enhancement) — CLOSED ✅
-- Issue #21: Add Help/Tutorial Modals (enhancement, ready-for-dev/review)
-- Issue #22: Add Sound Effects Toggle (enhancement, ready-for-test)
-- Issue #23: Add Offline PWA Support (enhancement, ready-for-review)
+- Issue #21: Add Help/Tutorial Modals (enhancement, ready-for-review)
+- Issue #22: Add Sound Effects Toggle (enhancement, ready-for-dev/review)
+- Issue #23: Add Offline PWA Support (enhancement, ready-for-review/test)
 - All core requirements fulfilled - enhancements being processed
 
 ## Implementation Status Summary
