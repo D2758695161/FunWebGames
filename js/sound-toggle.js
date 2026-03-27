@@ -53,7 +53,8 @@ const SoundToggle = (function() {
     toggleButton.addEventListener('click', toggle);
     
     // Add to page (typically in header)
-    const header = document.querySelector('.game-header');
+    // Check for game-header first (individual games), then page-header (landing page)
+    const header = document.querySelector('.game-header') || document.querySelector('.page-header');
     if (header) {
       const existingBtn = header.querySelector('.sound-toggle-btn');
       if (existingBtn) {
