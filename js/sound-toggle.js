@@ -48,7 +48,7 @@ const SoundToggle = (function() {
     toggleButton.className = 'sound-toggle-btn';
     toggleButton.setAttribute('aria-label', isMutedState ? 'Unmute sound' : 'Mute sound');
     toggleButton.setAttribute('title', isMutedState ? 'Unmute' : 'Mute');
-    toggleButton.innerHTML = isMutedState ? '🔇' : '🔊';
+    toggleButton.textContent = isMutedState ? '🔇' : '🔊';
     
     toggleButton.addEventListener('click', toggle);
     
@@ -109,7 +109,7 @@ const SoundToggle = (function() {
   function updateButton() {
     if (!toggleButton) return;
     
-    toggleButton.innerHTML = isMutedState ? '🔇' : '🔊';
+    toggleButton.textContent = isMutedState ? '🔇' : '🔊';
     toggleButton.setAttribute('aria-label', isMutedState ? 'Unmute sound' : 'Mute sound');
     toggleButton.setAttribute('title', isMutedState ? 'Unmute' : 'Mute');
     
